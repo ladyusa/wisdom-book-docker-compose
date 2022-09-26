@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+
+  docker-mysql-book:
+    container_name: docker-mysql-book
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: book
+      MYSQL_ROOT_PASSWORD: abc123
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+    networks:
+      - book-network
+    restart: always
+
+  wisdom-book:
+    restart: on-failure
+    container_name: wisdom-book
+    build:
+      context: .
+      dockerfile: book.dockerfile
+    image: wisdom-book:latest
+    expose:
+      - 8090
+    ports:
+      - 8090:8090
+    networks:
+      - book-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://docker-mysql-book:3306/book
+    depends_on:
+      - docker-mysql-book
+
+networks:
+  book-network:
+    driver: bridge
