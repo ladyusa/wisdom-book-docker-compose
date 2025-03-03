@@ -12,13 +12,13 @@ services:
       - book-network
     restart: always
 
-  wisdom-book:
+  wisdom-book-web:
     restart: on-failure
-    container_name: wisdom-book
+    container_name: wisdom-book-web
     build:
       context: .
       dockerfile: book.dockerfile
-    image: wisdom-book:latest
+    image: wisdom-book-web:latest
     ports:
       - "55001:8090"
     networks:
