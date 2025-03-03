@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-slim
+FROM openjdk:21-jdk-slim
 COPY target/book-1.0.jar book.jar
 EXPOSE 8090
 ENTRYPOINT ["java","-jar","/book.jar"]

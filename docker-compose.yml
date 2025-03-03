@@ -8,10 +8,6 @@ services:
     environment:
       MYSQL_DATABASE: book
       MYSQL_ROOT_PASSWORD: abc123
-    expose:
-      - 3306
-    ports:
-      - 3306:3306
     networks:
       - book-network
     restart: always
@@ -23,10 +19,8 @@ services:
       context: .
       dockerfile: book.dockerfile
     image: wisdom-book:latest
-    expose:
-      - 8090
     ports:
-      - 8090:8090
+      - "55001:8090"
     networks:
       - book-network
     environment:
